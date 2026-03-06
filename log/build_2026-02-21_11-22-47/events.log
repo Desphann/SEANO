@@ -1,0 +1,86 @@
+[0.000000] (-) TimerEvent: {}
+[0.000317] (seano_logger) JobQueued: {'identifier': 'seano_logger', 'dependencies': OrderedDict()}
+[0.000414] (seano_sensors) JobQueued: {'identifier': 'seano_sensors', 'dependencies': OrderedDict()}
+[0.000454] (seano_logger) JobStarted: {'identifier': 'seano_logger'}
+[0.012856] (seano_sensors) JobStarted: {'identifier': 'seano_sensors'}
+[0.098856] (-) TimerEvent: {}
+[0.199173] (-) TimerEvent: {}
+[0.299567] (-) TimerEvent: {}
+[0.399981] (-) TimerEvent: {}
+[0.500309] (-) TimerEvent: {}
+[0.600662] (-) TimerEvent: {}
+[0.701135] (-) TimerEvent: {}
+[0.801457] (-) TimerEvent: {}
+[0.901775] (-) TimerEvent: {}
+[1.002135] (-) TimerEvent: {}
+[1.102474] (-) TimerEvent: {}
+[1.202874] (-) TimerEvent: {}
+[1.303361] (-) TimerEvent: {}
+[1.403761] (-) TimerEvent: {}
+[1.504179] (-) TimerEvent: {}
+[1.604690] (-) TimerEvent: {}
+[1.607210] (seano_logger) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/raihan/seano_ws/build/seano_logger/build', '--no-deps', 'symlink_data'], 'cwd': '/home/raihan/seano_ws/build/seano_logger', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'raihan', 'LC_TIME': 'id_ID.UTF-8', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/raihan', 'OLDPWD': '/home/raihan/seano_ws', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'LC_MONETARY': 'id_ID.UTF-8', 'SYSTEMD_EXEC_PID': '1178', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/raihan/seano_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'raihan', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'raihan', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/ASUS:@/tmp/.ICE-unix/1147,unix/ASUS:/tmp/.ICE-unix/1147', 'XDG_MENU_PREFIX': 'gnome-', 'LC_ADDRESS': 'id_ID.UTF-8', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/a243615a_03ef_484c_9d27_d5341a7a8534', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'LC_TELEPHONE': 'id_ID.UTF-8', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.H052K3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.253', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/raihan/seano_ws/install/seano_sensors:/home/raihan/seano_ws/install/seano_logger:/opt/ros/humble', 'SHELL': '/bin/bash', 'LC_NAME': 'id_ID.UTF-8', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'id_ID.UTF-8', 'LC_IDENTIFICATION': 'id_ID.UTF-8', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/raihan/seano_ws/build/seano_logger', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/raihan/seano_ws/build/seano_logger/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_logger/lib/python3.10/site-packages:/home/raihan/seano_ws/build/seano_sensors:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:/home/raihan/seano_ws/build/seano_logger:/home/raihan/seano_ws/install/seano_logger/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'LC_NUMERIC': 'id_ID.UTF-8', 'LC_PAPER': 'id_ID.UTF-8', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[1.634090] (seano_sensors) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/home/raihan/seano_ws/build/seano_sensors/build', '--no-deps', 'symlink_data'], 'cwd': '/home/raihan/seano_ws/build/seano_sensors', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'raihan', 'LC_TIME': 'id_ID.UTF-8', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/raihan', 'OLDPWD': '/home/raihan/seano_ws', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'LC_MONETARY': 'id_ID.UTF-8', 'SYSTEMD_EXEC_PID': '1178', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/raihan/seano_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'raihan', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'raihan', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/ASUS:@/tmp/.ICE-unix/1147,unix/ASUS:/tmp/.ICE-unix/1147', 'XDG_MENU_PREFIX': 'gnome-', 'LC_ADDRESS': 'id_ID.UTF-8', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/a243615a_03ef_484c_9d27_d5341a7a8534', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'LC_TELEPHONE': 'id_ID.UTF-8', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.H052K3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.253', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/raihan/seano_ws/install/seano_sensors:/home/raihan/seano_ws/install/seano_logger:/opt/ros/humble', 'SHELL': '/bin/bash', 'LC_NAME': 'id_ID.UTF-8', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LC_MEASUREMENT': 'id_ID.UTF-8', 'LC_IDENTIFICATION': 'id_ID.UTF-8', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/raihan/seano_ws/build/seano_sensors', 'LC_ALL': 'en_US.UTF-8', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/raihan/seano_ws/build/seano_sensors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:/home/raihan/seano_ws/build/seano_sensors:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:/home/raihan/seano_ws/build/seano_logger:/home/raihan/seano_ws/install/seano_logger/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'LC_NUMERIC': 'id_ID.UTF-8', 'LC_PAPER': 'id_ID.UTF-8', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[1.704789] (-) TimerEvent: {}
+[1.805170] (-) TimerEvent: {}
+[1.905571] (-) TimerEvent: {}
+[2.008522] (-) TimerEvent: {}
+[2.110419] (-) TimerEvent: {}
+[2.158420] (seano_logger) StdoutLine: {'line': b'running develop\n'}
+[2.209639] (seano_sensors) StdoutLine: {'line': b'running develop\n'}
+[2.210512] (-) TimerEvent: {}
+[2.313408] (-) TimerEvent: {}
+[2.413821] (-) TimerEvent: {}
+[2.514254] (-) TimerEvent: {}
+[2.553490] (seano_logger) StdoutLine: {'line': b'running egg_info\n'}
+[2.553767] (seano_logger) StdoutLine: {'line': b'creating seano_logger.egg-info\n'}
+[2.554420] (seano_logger) StdoutLine: {'line': b'writing seano_logger.egg-info/PKG-INFO\n'}
+[2.555587] (seano_logger) StdoutLine: {'line': b'writing dependency_links to seano_logger.egg-info/dependency_links.txt\n'}
+[2.555941] (seano_logger) StdoutLine: {'line': b'writing entry points to seano_logger.egg-info/entry_points.txt\n'}
+[2.556182] (seano_logger) StdoutLine: {'line': b'writing requirements to seano_logger.egg-info/requires.txt\n'}
+[2.556482] (seano_logger) StdoutLine: {'line': b'writing top-level names to seano_logger.egg-info/top_level.txt\n'}
+[2.556774] (seano_logger) StdoutLine: {'line': b"writing manifest file 'seano_logger.egg-info/SOURCES.txt'\n"}
+[2.563443] (seano_logger) StdoutLine: {'line': b"reading manifest file 'seano_logger.egg-info/SOURCES.txt'\n"}
+[2.563895] (seano_logger) StdoutLine: {'line': b"writing manifest file 'seano_logger.egg-info/SOURCES.txt'\n"}
+[2.567505] (seano_logger) StdoutLine: {'line': b'running build_ext\n'}
+[2.569910] (seano_logger) StdoutLine: {'line': b'Creating /home/raihan/seano_ws/install/seano_logger/lib/python3.10/site-packages/seano-logger.egg-link (link to .)\n'}
+[2.570278] (seano_logger) StdoutLine: {'line': b'Installing logger_node script to /home/raihan/seano_ws/install/seano_logger/lib/seano_logger\n'}
+[2.570614] (seano_logger) StdoutLine: {'line': b'\n'}
+[2.570814] (seano_logger) StdoutLine: {'line': b'Installed /home/raihan/seano_ws/build/seano_logger\n'}
+[2.570973] (seano_logger) StdoutLine: {'line': b'running symlink_data\n'}
+[2.572417] (seano_logger) StdoutLine: {'line': b'creating /home/raihan/seano_ws/install/seano_logger/share/ament_index\n'}
+[2.572739] (seano_logger) StdoutLine: {'line': b'creating /home/raihan/seano_ws/install/seano_logger/share/ament_index/resource_index\n'}
+[2.572943] (seano_logger) StdoutLine: {'line': b'creating /home/raihan/seano_ws/install/seano_logger/share/ament_index/resource_index/packages\n'}
+[2.573107] (seano_logger) StdoutLine: {'line': b'symbolically linking /home/raihan/seano_ws/build/seano_logger/resource/seano_logger -> /home/raihan/seano_ws/install/seano_logger/share/ament_index/resource_index/packages\n'}
+[2.573265] (seano_logger) StdoutLine: {'line': b'symbolically linking /home/raihan/seano_ws/build/seano_logger/package.xml -> /home/raihan/seano_ws/install/seano_logger/share/seano_logger\n'}
+[2.618438] (-) TimerEvent: {}
+[2.652742] (seano_logger) CommandEnded: {'returncode': 0}
+[2.679700] (seano_sensors) StdoutLine: {'line': b'running egg_info\n'}
+[2.680641] (seano_sensors) StdoutLine: {'line': b'creating seano_sensors.egg-info\n'}
+[2.682523] (seano_sensors) StdoutLine: {'line': b'writing seano_sensors.egg-info/PKG-INFO\n'}
+[2.682857] (seano_sensors) StdoutLine: {'line': b'writing dependency_links to seano_sensors.egg-info/dependency_links.txt\n'}
+[2.683080] (seano_sensors) StdoutLine: {'line': b'writing entry points to seano_sensors.egg-info/entry_points.txt\n'}
+[2.683294] (seano_sensors) StdoutLine: {'line': b'writing requirements to seano_sensors.egg-info/requires.txt\n'}
+[2.690332] (seano_sensors) StdoutLine: {'line': b'writing top-level names to seano_sensors.egg-info/top_level.txt\n'}
+[2.690585] (seano_sensors) StdoutLine: {'line': b"writing manifest file 'seano_sensors.egg-info/SOURCES.txt'\n"}
+[2.690777] (seano_sensors) StdoutLine: {'line': b"reading manifest file 'seano_sensors.egg-info/SOURCES.txt'\n"}
+[2.690944] (seano_sensors) StdoutLine: {'line': b"writing manifest file 'seano_sensors.egg-info/SOURCES.txt'\n"}
+[2.695886] (seano_sensors) StdoutLine: {'line': b'running build_ext\n'}
+[2.696362] (seano_sensors) StdoutLine: {'line': b'Creating /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano-sensors.egg-link (link to .)\n'}
+[2.697214] (seano_sensors) StdoutLine: {'line': b'Installing adcp_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors\n'}
+[2.701497] (seano_logger) JobEnded: {'identifier': 'seano_logger', 'rc': 0}
+[2.702578] (seano_sensors) StdoutLine: {'line': b'Installing ctd_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors\n'}
+[2.702887] (seano_sensors) StdoutLine: {'line': b'Installing gps_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors\n'}
+[2.703108] (seano_sensors) StdoutLine: {'line': b'Installing imu_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors\n'}
+[2.703280] (seano_sensors) StdoutLine: {'line': b'\n'}
+[2.703491] (seano_sensors) StdoutLine: {'line': b'Installed /home/raihan/seano_ws/build/seano_sensors\n'}
+[2.703671] (seano_sensors) StdoutLine: {'line': b'running symlink_data\n'}
+[2.703833] (seano_sensors) StdoutLine: {'line': b'creating /home/raihan/seano_ws/install/seano_sensors/share/ament_index\n'}
+[2.703989] (seano_sensors) StdoutLine: {'line': b'creating /home/raihan/seano_ws/install/seano_sensors/share/ament_index/resource_index\n'}
+[2.704145] (seano_sensors) StdoutLine: {'line': b'creating /home/raihan/seano_ws/install/seano_sensors/share/ament_index/resource_index/packages\n'}
+[2.704298] (seano_sensors) StdoutLine: {'line': b'symbolically linking /home/raihan/seano_ws/build/seano_sensors/resource/seano_sensors -> /home/raihan/seano_ws/install/seano_sensors/share/ament_index/resource_index/packages\n'}
+[2.704955] (seano_sensors) StdoutLine: {'line': b'symbolically linking /home/raihan/seano_ws/build/seano_sensors/package.xml -> /home/raihan/seano_ws/install/seano_sensors/share/seano_sensors\n'}
+[2.718591] (-) TimerEvent: {}
+[2.777292] (seano_sensors) CommandEnded: {'returncode': 0}
+[2.798497] (seano_sensors) JobEnded: {'identifier': 'seano_sensors', 'rc': 0}
+[2.800312] (-) EventReactorShutdown: {}

@@ -1,0 +1,13 @@
+package.xml
+setup.cfg
+setup.py
+resource/seano_logger
+seano_logger/__init__.py
+seano_logger/logger_node.py
+seano_logger.egg-info/PKG-INFO
+seano_logger.egg-info/SOURCES.txt
+seano_logger.egg-info/dependency_links.txt
+seano_logger.egg-info/entry_points.txt
+seano_logger.egg-info/requires.txt
+seano_logger.egg-info/top_level.txt
+seano_logger.egg-info/zip-safe

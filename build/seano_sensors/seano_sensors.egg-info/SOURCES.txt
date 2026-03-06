@@ -1,0 +1,16 @@
+package.xml
+setup.cfg
+setup.py
+resource/seano_sensors
+seano_sensors/__init__.py
+seano_sensors/adcp_reader.py
+seano_sensors/ctd_reader.py
+seano_sensors/gps_reader.py
+seano_sensors/imu_reader.py
+seano_sensors.egg-info/PKG-INFO
+seano_sensors.egg-info/SOURCES.txt
+seano_sensors.egg-info/dependency_links.txt
+seano_sensors.egg-info/entry_points.txt
+seano_sensors.egg-info/requires.txt
+seano_sensors.egg-info/top_level.txt
+seano_sensors.egg-info/zip-safe

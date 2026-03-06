@@ -1,0 +1,20 @@
+[1.632s] Invoking command in '/home/raihan/seano_ws/build/seano_sensors': PYTHONPATH=/home/raihan/seano_ws/build/seano_sensors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/raihan/seano_ws/build/seano_sensors/build --no-deps symlink_data
+[2.156s] running develop
+[2.447s] running egg_info
+[2.448s] writing seano_sensors.egg-info/PKG-INFO
+[2.449s] writing dependency_links to seano_sensors.egg-info/dependency_links.txt
+[2.450s] writing entry points to seano_sensors.egg-info/entry_points.txt
+[2.450s] writing requirements to seano_sensors.egg-info/requires.txt
+[2.450s] writing top-level names to seano_sensors.egg-info/top_level.txt
+[2.454s] reading manifest file 'seano_sensors.egg-info/SOURCES.txt'
+[2.455s] writing manifest file 'seano_sensors.egg-info/SOURCES.txt'
+[2.458s] running build_ext
+[2.458s] Creating /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano-sensors.egg-link (link to .)
+[2.460s] Installing adcp_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.461s] Installing ctd_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.462s] Installing gps_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.463s] Installing imu_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.463s] 
+[2.463s] Installed /home/raihan/seano_ws/build/seano_sensors
+[2.463s] running symlink_data
+[2.515s] Invoked command in '/home/raihan/seano_ws/build/seano_sensors' returned '0': PYTHONPATH=/home/raihan/seano_ws/build/seano_sensors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/raihan/seano_ws/build/seano_sensors/build --no-deps symlink_data
