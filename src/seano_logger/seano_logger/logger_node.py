@@ -14,7 +14,7 @@ class SeanoLogger(Node):
     def __init__(self):
         super().__init__('logger_node')
 
-        self.mount_point = "/media/raihan/FATA"
+        self.mount_point = "/media/raihan/SEANO"
         self.flush_interval = 3.0
 
         # ===== Waktu Lokal Sistem =====
