@@ -28,6 +28,7 @@ setup(
         'imu_reader = seano_sensors.imu_reader:main',
         'ctd_reader = seano_sensors.ctd_reader:main',
         'adcp_reader = seano_sensors.adcp_reader:main',
+        'battery_reader = seano_sensors.battery_reader:main',
         ],
     },
 )
