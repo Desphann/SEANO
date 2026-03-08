@@ -2,6 +2,7 @@ import os
 import time
 from datetime import datetime
 
+import psutil
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
@@ -49,10 +50,6 @@ class SeanoLogger(Node):
             f.write("Platform: SEANO USV\n")
 
         # Struktur utama logger
-        # files        : file .log tiap sensor
-        # csv_files    : file .csv tiap sensor
-        # buffers      : buffer data sementara sebelum flush
-        # sample_count : jumlah data tiap sensor
         self.files = {}
         self.csv_files = {}
         self.buffers = {}
@@ -60,9 +57,18 @@ class SeanoLogger(Node):
         self.detected_sensors = set()
         self.subscriptions_map = {}
 
-        # Timer untuk:
-        # 1. mendeteksi sensor/topic yang aktif
-        # 2. menulis buffer ke file secara berkala
+        # Untuk metrics sistem
+        self.metrics_log_file = None
+        self.metrics_csv_file = None
+        self.last_sample_count = {}
+        self.last_flush_time = time.time()
+
+        self.init_metrics_logger()
+
+        # Prime cpu_percent supaya pembacaan berikutnya lebih stabil
+        psutil.cpu_percent(interval=None)
+
+        # Timer
         self.create_timer(2.0, self.detect_and_initialize_sensors)
         self.create_timer(self.flush_interval, self.flush_buffers)
 
@@ -74,6 +80,30 @@ class SeanoLogger(Node):
         # Timestamp lokal dengan presisi milidetik
         now = datetime.now()
         return now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+    def init_metrics_logger(self):
+        # File tambahan untuk metrics sistem
+        metrics_log_path = os.path.join(self.base_path, "system_metrics.log")
+        metrics_csv_path = os.path.join(self.base_path, "system_metrics.csv")
+
+        self.metrics_log_file = open(metrics_log_path, "w")
+        self.metrics_csv_file = open(metrics_csv_path, "w")
+
+        self.metrics_log_file.write(
+            "[System]\n"
+            "Platform=SEANO USV\n"
+            f"Start_Time={self.start_time_obj.strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"Timezone={self.local_timezone}\n\n"
+            "[Sensor]\n"
+            "Name=System Metrics\n\n"
+            "[Columns]\n"
+            f"Timestamp({self.local_timezone})\tWriteSpeed(Bps)\tCPU(%)\tRAM(%)\tGPS_Hz\tIMU_Hz\tCTD_Hz\tADCP_Hz\tBATTERY_Hz\n\n"
+            "[Data]\n"
+        )
+
+        self.metrics_csv_file.write(
+            "timestamp,write_speed_Bps,cpu_percent,ram_percent,gps_hz,imu_hz,ctd_hz,adcp_hz,battery_hz\n"
+        )
 
     def detect_and_initialize_sensors(self):
         # Ambil semua topic aktif di ROS2
@@ -188,11 +218,11 @@ class SeanoLogger(Node):
         self.csv_files[key] = csv_file
         self.buffers[key] = []
         self.sample_count[key] = 0
+        self.last_sample_count[key] = 0
 
         self.get_logger().info(f"{name} detected")
 
     def gps_callback(self, msg):
-        # Simpan data GPS ke buffer
         t = self.get_local_timestamp()
         log_line = f"{t}\t{msg.latitude}\t{msg.longitude}\t{msg.altitude}\n"
         csv_line = f"{t},{msg.latitude},{msg.longitude},{msg.altitude}\n"
@@ -200,7 +230,6 @@ class SeanoLogger(Node):
         self.sample_count['gps'] += 1
 
     def imu_callback(self, msg):
-        # Simpan percepatan linear IMU ke buffer
         t = self.get_local_timestamp()
         log_line = (
             f"{t}\t"
@@ -218,7 +247,6 @@ class SeanoLogger(Node):
         self.sample_count['imu'] += 1
 
     def ctd_callback(self, msg):
-        # Simpan seluruh data CTD sesuai urutan dari publisher
         t = self.get_local_timestamp()
         data_str = "\t".join(map(str, msg.data))
         csv_str = ",".join(map(str, msg.data))
@@ -228,7 +256,6 @@ class SeanoLogger(Node):
         self.sample_count['ctd'] += 1
 
     def adcp_callback(self, msg):
-        # Simpan seluruh data ADCP sesuai urutan dari publisher
         t = self.get_local_timestamp()
         data_str = "\t".join(map(str, msg.data))
         csv_str = ",".join(map(str, msg.data))
@@ -238,24 +265,83 @@ class SeanoLogger(Node):
         self.sample_count['adcp'] += 1
 
     def battery_callback(self, msg):
-        # Simpan data battery: voltage, current, percentage
         t = self.get_local_timestamp()
         log_line = f"{t}\t{msg.voltage}\t{msg.current}\t{msg.percentage}\n"
         csv_line = f"{t},{msg.voltage},{msg.current},{msg.percentage}\n"
         self.buffers['battery'].append((log_line, csv_line))
         self.sample_count['battery'] += 1
 
+    def get_sensor_rate(self, key, elapsed):
+        current = self.sample_count.get(key, 0)
+        previous = self.last_sample_count.get(key, 0)
+        rate = (current - previous) / elapsed if elapsed > 0 else 0.0
+        self.last_sample_count[key] = current
+        return rate
+
+    def log_system_metrics(self, bytes_written, elapsed):
+        t = self.get_local_timestamp()
+
+        write_speed = bytes_written / elapsed if elapsed > 0 else 0.0  # Bps
+        cpu_usage = psutil.cpu_percent(interval=None)
+        ram_usage = psutil.virtual_memory().percent
+
+        gps_hz = self.get_sensor_rate('gps', elapsed)
+        imu_hz = self.get_sensor_rate('imu', elapsed)
+        ctd_hz = self.get_sensor_rate('ctd', elapsed)
+        adcp_hz = self.get_sensor_rate('adcp', elapsed)
+        battery_hz = self.get_sensor_rate('battery', elapsed)
+
+        log_line = (
+            f"{t}\t"
+            f"{write_speed:.2f}\t"
+            f"{cpu_usage:.2f}\t"
+            f"{ram_usage:.2f}\t"
+            f"{gps_hz:.2f}\t"
+            f"{imu_hz:.2f}\t"
+            f"{ctd_hz:.2f}\t"
+            f"{adcp_hz:.2f}\t"
+            f"{battery_hz:.2f}\n"
+        )
+
+        csv_line = (
+            f"{t},"
+            f"{write_speed:.2f},"
+            f"{cpu_usage:.2f},"
+            f"{ram_usage:.2f},"
+            f"{gps_hz:.2f},"
+            f"{imu_hz:.2f},"
+            f"{ctd_hz:.2f},"
+            f"{adcp_hz:.2f},"
+            f"{battery_hz:.2f}\n"
+        )
+
+        self.metrics_log_file.write(log_line)
+        self.metrics_csv_file.write(csv_line)
+        self.metrics_log_file.flush()
+        self.metrics_csv_file.flush()
+
     def flush_buffers(self):
         # Tulis seluruh isi buffer ke file
+        bytes_written = 0
+        now = time.time()
+        elapsed = now - self.last_flush_time if self.last_flush_time else self.flush_interval
+
         for key in self.buffers:
             if self.buffers[key]:
                 for log_line, csv_line in self.buffers[key]:
                     self.files[key].write(log_line)
                     self.csv_files[key].write(csv_line)
 
+                    bytes_written += len(log_line.encode('utf-8'))
+                    bytes_written += len(csv_line.encode('utf-8'))
+
                 self.files[key].flush()
                 self.csv_files[key].flush()
                 self.buffers[key].clear()
+
+        # Log metrics sistem
+        self.log_system_metrics(bytes_written, elapsed)
+        self.last_flush_time = now
 
         self.get_logger().info("Buffers flushed")
 
@@ -266,6 +352,11 @@ class SeanoLogger(Node):
         for key in self.files:
             self.files[key].close()
             self.csv_files[key].close()
+
+        if self.metrics_log_file:
+            self.metrics_log_file.close()
+        if self.metrics_csv_file:
+            self.metrics_csv_file.close()
 
         os.sync()
         super().destroy_node()
