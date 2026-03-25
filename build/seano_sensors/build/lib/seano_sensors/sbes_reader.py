@@ -13,7 +13,7 @@ class SBESSim(Node):
         self.declare_parameter('sample_rate', 1.0)
         self.sample_rate = float(self.get_parameter('sample_rate').value)
 
-        self.publisher_ = self.create_publisher(Float64, '/sbes/depth', 10)
+        self.publisher_ = self.create_publisher(Float64, '/sbes/data', 10)
         self.timer = self.create_timer(1.0 / self.sample_rate, self.publish_sbes)
 
         self.start_time = time.time()
@@ -21,7 +21,7 @@ class SBESSim(Node):
         self.depth_amp = 1.5
 
         self.get_logger().info(
-            f"SBES Dummy Started | topic=/sbes/depth | sample_rate={self.sample_rate} Hz"
+            f"SBES Dummy Started | topic=/sbes/data | sample_rate={self.sample_rate} Hz"
         )
 
     def publish_sbes(self):

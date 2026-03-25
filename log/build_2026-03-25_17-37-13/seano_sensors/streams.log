@@ -1,0 +1,29 @@
+[1.591s] Invoking command in '/home/raihan/seano_ws/src/seano_sensors': PYTHONPATH=/home/raihan/seano_ws/build/seano_sensors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/seano_sensors build --build-base /home/raihan/seano_ws/build/seano_sensors/build install --record /home/raihan/seano_ws/build/seano_sensors/install.log --single-version-externally-managed install_data
+[2.010s] running egg_info
+[2.011s] writing ../../build/seano_sensors/seano_sensors.egg-info/PKG-INFO
+[2.012s] writing dependency_links to ../../build/seano_sensors/seano_sensors.egg-info/dependency_links.txt
+[2.012s] writing entry points to ../../build/seano_sensors/seano_sensors.egg-info/entry_points.txt
+[2.013s] writing requirements to ../../build/seano_sensors/seano_sensors.egg-info/requires.txt
+[2.013s] writing top-level names to ../../build/seano_sensors/seano_sensors.egg-info/top_level.txt
+[2.018s] reading manifest file '../../build/seano_sensors/seano_sensors.egg-info/SOURCES.txt'
+[2.022s] writing manifest file '../../build/seano_sensors/seano_sensors.egg-info/SOURCES.txt'
+[2.023s] running build
+[2.023s] running build_py
+[2.023s] copying seano_sensors/sbes_reader.py -> /home/raihan/seano_ws/build/seano_sensors/build/lib/seano_sensors
+[2.024s] running install
+[2.025s] running install_lib
+[2.029s] copying /home/raihan/seano_ws/build/seano_sensors/build/lib/seano_sensors/sbes_reader.py -> /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors
+[2.032s] byte-compiling /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors/sbes_reader.py to sbes_reader.cpython-310.pyc
+[2.032s] running install_data
+[2.032s] running install_egg_info
+[2.035s] removing '/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors-0.0.0-py3.10.egg-info' (and everything under it)
+[2.036s] Copying ../../build/seano_sensors/seano_sensors.egg-info to /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors-0.0.0-py3.10.egg-info
+[2.065s] running install_scripts
+[2.106s] Installing adcp_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.107s] Installing battery_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.108s] Installing ctd_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.108s] Installing gps_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.108s] Installing imu_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.109s] Installing sbes_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.109s] writing list of installed files to '/home/raihan/seano_ws/build/seano_sensors/install.log'
+[2.164s] Invoked command in '/home/raihan/seano_ws/src/seano_sensors' returned '0': PYTHONPATH=/home/raihan/seano_ws/build/seano_sensors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/seano_sensors build --build-base /home/raihan/seano_ws/build/seano_sensors/build install --record /home/raihan/seano_ws/build/seano_sensors/install.log --single-version-externally-managed install_data
