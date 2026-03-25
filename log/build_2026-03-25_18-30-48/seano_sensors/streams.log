@@ -1,0 +1,32 @@
+[1.665s] Invoking command in '/home/raihan/seano_ws/src/seano_sensors': PYTHONPATH=/home/raihan/seano_ws/build/seano_sensors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/seano_sensors build --build-base /home/raihan/seano_ws/build/seano_sensors/build install --record /home/raihan/seano_ws/build/seano_sensors/install.log --single-version-externally-managed install_data
+[2.213s] running egg_info
+[2.215s] writing ../../build/seano_sensors/seano_sensors.egg-info/PKG-INFO
+[2.215s] writing dependency_links to ../../build/seano_sensors/seano_sensors.egg-info/dependency_links.txt
+[2.218s] writing entry points to ../../build/seano_sensors/seano_sensors.egg-info/entry_points.txt
+[2.218s] writing requirements to ../../build/seano_sensors/seano_sensors.egg-info/requires.txt
+[2.219s] writing top-level names to ../../build/seano_sensors/seano_sensors.egg-info/top_level.txt
+[2.223s] reading manifest file '../../build/seano_sensors/seano_sensors.egg-info/SOURCES.txt'
+[2.226s] writing manifest file '../../build/seano_sensors/seano_sensors.egg-info/SOURCES.txt'
+[2.226s] running build
+[2.226s] running build_py
+[2.226s] copying seano_sensors/gps_reader.py -> /home/raihan/seano_ws/build/seano_sensors/build/lib/seano_sensors
+[2.227s] copying seano_sensors/imu_reader.py -> /home/raihan/seano_ws/build/seano_sensors/build/lib/seano_sensors
+[2.228s] running install
+[2.228s] running install_lib
+[2.230s] copying /home/raihan/seano_ws/build/seano_sensors/build/lib/seano_sensors/gps_reader.py -> /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors
+[2.230s] copying /home/raihan/seano_ws/build/seano_sensors/build/lib/seano_sensors/imu_reader.py -> /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors
+[2.232s] byte-compiling /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors/gps_reader.py to gps_reader.cpython-310.pyc
+[2.234s] byte-compiling /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors/imu_reader.py to imu_reader.cpython-310.pyc
+[2.235s] running install_data
+[2.235s] running install_egg_info
+[2.239s] removing '/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors-0.0.0-py3.10.egg-info' (and everything under it)
+[2.240s] Copying ../../build/seano_sensors/seano_sensors.egg-info to /home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages/seano_sensors-0.0.0-py3.10.egg-info
+[2.294s] running install_scripts
+[2.335s] Installing adcp_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.336s] Installing battery_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.336s] Installing ctd_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.336s] Installing gps_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.336s] Installing imu_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.337s] Installing sbes_reader script to /home/raihan/seano_ws/install/seano_sensors/lib/seano_sensors
+[2.338s] writing list of installed files to '/home/raihan/seano_ws/build/seano_sensors/install.log'
+[2.466s] Invoked command in '/home/raihan/seano_ws/src/seano_sensors' returned '0': PYTHONPATH=/home/raihan/seano_ws/build/seano_sensors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/seano_sensors build --build-base /home/raihan/seano_ws/build/seano_sensors/build install --record /home/raihan/seano_ws/build/seano_sensors/install.log --single-version-externally-managed install_data

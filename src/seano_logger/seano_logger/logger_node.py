@@ -24,6 +24,12 @@ class SeanoLogger(Node):
         # Interval logging metrics sistem
         self.metrics_interval = 1.0
 
+        # State logger
+        self.external_ready = False
+        self.external_failed_runtime = False
+        self.external_fail_reported = False
+        self.sensor_log_status = {}
+
         # Ambil waktu mulai misi dan timezone lokal
         self.start_time_obj = datetime.now()
         self.local_timezone = time.tzname[0]
@@ -41,7 +47,20 @@ class SeanoLogger(Node):
         # Semua output path aktif
         self.base_paths = []
 
+        # =========================================================
+        # PRIORITAS: external SSD harus siap dulu
+        # Kalau external tidak siap, logger tidak dimulai
+        # =========================================================
         if self.enable_external_logging:
+            if not self.is_path_writable(self.external_mount_point):
+                self.get_logger().fatal(
+                    f"SSD external belum terdeteksi / tidak writable: {self.external_mount_point}"
+                )
+                self.get_logger().fatal(
+                    "Logger tidak akan dimulai. Pastikan SSD sudah terpasang terlebih dahulu."
+                )
+                raise RuntimeError("External SSD not ready")
+
             external_base_path = os.path.join(
                 self.external_mount_point,
                 "SEANO_MISSIONS",
@@ -50,14 +69,27 @@ class SeanoLogger(Node):
                 day,
                 self.mission_id
             )
+
             try:
                 os.makedirs(external_base_path, exist_ok=True)
-                self.base_paths.append(external_base_path)
-            except Exception as e:
-                self.get_logger().warning(
-                    f"Gagal membuat folder external logging: {external_base_path} | {e}"
-                )
 
+                if not self.test_write_access(external_base_path):
+                    self.get_logger().fatal(
+                        f"SSD external terdeteksi tapi gagal ditulisi: {external_base_path}"
+                    )
+                    raise RuntimeError("External SSD not writable")
+
+                self.base_paths.append(external_base_path)
+                self.external_ready = True
+                self.get_logger().info(f"External logging ready: {external_base_path}")
+
+            except Exception as e:
+                self.get_logger().fatal(
+                    f"Gagal menyiapkan external logging: {external_base_path} | {e}"
+                )
+                raise RuntimeError("Failed to initialize external logging")
+
+        # Local tetap dibuat juga, tapi external tetap prioritas utama
         if self.enable_local_logging:
             local_base_path = os.path.join(
                 self.local_mount_point,
@@ -69,6 +101,7 @@ class SeanoLogger(Node):
             try:
                 os.makedirs(local_base_path, exist_ok=True)
                 self.base_paths.append(local_base_path)
+                self.get_logger().info(f"Local logging ready: {local_base_path}")
             except Exception as e:
                 self.get_logger().warning(
                     f"Gagal membuat folder local logging: {local_base_path} | {e}"
@@ -106,16 +139,52 @@ class SeanoLogger(Node):
         # Timer
         self.create_timer(2.0, self.detect_and_initialize_sensors)
         self.create_timer(self.metrics_interval, self.log_periodic_metrics)
+        self.create_timer(1.0, self.monitor_external_storage)
 
         for path in self.base_paths:
             self.get_logger().info(f"Mission folder: {path}")
         self.get_logger().info(f"Timezone: {self.local_timezone}")
         self.get_logger().info("SEANO Logger Started")
 
+    # =========================================================
+    # Utility
+    # =========================================================
     def get_local_timestamp(self):
         now = datetime.now()
         return now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
 
+    def is_path_writable(self, path):
+        return os.path.exists(path) and os.access(path, os.W_OK)
+
+    def test_write_access(self, path):
+        test_file = os.path.join(path, ".seano_write_test")
+        try:
+            with open(test_file, "w") as f:
+                f.write("ok")
+            os.remove(test_file)
+            return True
+        except Exception:
+            return False
+
+    def monitor_external_storage(self):
+        if not self.enable_external_logging or not self.external_ready:
+            return
+
+        if not self.is_path_writable(self.external_mount_point):
+            if not self.external_fail_reported:
+                self.get_logger().fatal(
+                    f"SSD external terputus / tidak writable lagi: {self.external_mount_point}"
+                )
+                self.get_logger().fatal(
+                    "Logging ke SSD bermasalah. Local mungkin masih aktif, tapi external gagal."
+                )
+                self.external_fail_reported = True
+                self.external_failed_runtime = True
+            return
+
+    # =========================================================
+    # Metrics logger
+    # =========================================================
     def init_metrics_logger(self):
         for base_path in self.base_paths:
             metrics_log_path = os.path.join(base_path, "system_metrics.log")
@@ -143,6 +212,9 @@ class SeanoLogger(Node):
             self.metrics_log_files.append(metrics_log_file)
             self.metrics_csv_files.append(metrics_csv_file)
 
+    # =========================================================
+    # Sensor detection
+    # =========================================================
     def detect_and_initialize_sensors(self):
         topics = dict(self.get_topic_names_and_types())
 
@@ -160,6 +232,7 @@ class SeanoLogger(Node):
                 qos_profile_sensor_data
             )
             self.detected_sensors.add('gps')
+            self.get_logger().info("GPS detected")
 
         if '/mavros/imu/data' in topics and 'imu' not in self.detected_sensors:
             self.init_sensor(
@@ -175,6 +248,7 @@ class SeanoLogger(Node):
                 qos_profile_sensor_data
             )
             self.detected_sensors.add('imu')
+            self.get_logger().info("IMU detected")
 
         if '/ctd/data' in topics and 'ctd' not in self.detected_sensors:
             self.init_sensor(
@@ -190,6 +264,7 @@ class SeanoLogger(Node):
                 50
             )
             self.detected_sensors.add('ctd')
+            self.get_logger().info("CTD detected")
 
         if '/adcp/data' in topics and 'adcp' not in self.detected_sensors:
             self.init_sensor(
@@ -212,6 +287,7 @@ class SeanoLogger(Node):
                 10
             )
             self.detected_sensors.add('adcp')
+            self.get_logger().info("ADCP detected")
 
         if '/battery/state' in topics and 'battery' not in self.detected_sensors:
             self.init_sensor(
@@ -227,6 +303,7 @@ class SeanoLogger(Node):
                 10
             )
             self.detected_sensors.add('battery')
+            self.get_logger().info("Battery detected")
 
         if '/sbes/data' in topics and 'sbes' not in self.detected_sensors:
             self.init_sensor(
@@ -242,13 +319,14 @@ class SeanoLogger(Node):
                 10
             )
             self.detected_sensors.add('sbes')
+            self.get_logger().info("SBES detected")
 
     def init_sensor(self, key, name, log_columns, csv_columns):
         self.files[key] = []
         self.csv_files[key] = []
-
         self.sample_count[key] = 0
         self.last_sample_count[key] = 0
+        self.sensor_log_status[key] = False
 
         for base_path in self.base_paths:
             log_path = os.path.join(base_path, f"{key}.log")
@@ -274,25 +352,64 @@ class SeanoLogger(Node):
             self.files[key].append(log_file)
             self.csv_files[key].append(csv_file)
 
-        self.get_logger().info(f"{name} detected")
-
+    # =========================================================
+    # Safe write
+    # =========================================================
     def write_sensor_data(self, key, log_line, csv_line):
         if key not in self.files:
             return
 
-        for log_file in self.files[key]:
-            log_file.write(log_line)
-            log_file.flush()
+        success_count = 0
+        total_targets = len(self.files[key])
 
-        for csv_file in self.csv_files[key]:
-            csv_file.write(csv_line)
-            csv_file.flush()
+        for idx, log_file in enumerate(self.files[key]):
+            try:
+                log_file.write(log_line)
+                log_file.flush()
+                self.csv_files[key][idx].write(csv_line)
+                self.csv_files[key][idx].flush()
+                success_count += 1
+            except Exception as e:
+                self.get_logger().error(f"{key.upper()} logging failed on target {idx}: {e}")
 
-        self.bytes_written_since_last_metrics += len(log_line.encode('utf-8'))
-        self.bytes_written_since_last_metrics += len(csv_line.encode('utf-8'))
+        if success_count > 0:
+            self.bytes_written_since_last_metrics += len(log_line.encode('utf-8'))
+            self.bytes_written_since_last_metrics += len(csv_line.encode('utf-8'))
+            self.sample_count[key] += 1
 
-        self.sample_count[key] += 1
+            if not self.sensor_log_status.get(key, False):
+                self.get_logger().info(f"{key.upper()} logging active")
+                self.sensor_log_status[key] = True
+        else:
+            if self.sensor_log_status.get(key, False):
+                self.get_logger().error(f"{key.upper()} logging failed on all targets")
+                self.sensor_log_status[key] = False
 
+        # Tegaskan kondisi external jika target external gagal runtime
+        if self.enable_external_logging and self.external_ready and total_targets > 0:
+            external_ok = False
+            external_path_prefix = os.path.join(self.external_mount_point, "SEANO_MISSIONS")
+
+            for idx, log_file in enumerate(self.files[key]):
+                file_name = getattr(log_file, "name", "")
+                if file_name.startswith(external_path_prefix):
+                    try:
+                        # kalau penulisan sebelumnya sukses, file handle masih valid
+                        external_ok = True
+                    except Exception:
+                        external_ok = False
+
+            if not self.is_path_writable(self.external_mount_point):
+                if not self.external_fail_reported:
+                    self.get_logger().fatal(
+                        f"SSD external terputus / tidak writable lagi: {self.external_mount_point}"
+                    )
+                    self.external_fail_reported = True
+                    self.external_failed_runtime = True
+
+    # =========================================================
+    # Sensor callbacks
+    # =========================================================
     def gps_callback(self, msg):
         t = self.get_local_timestamp()
         log_line = f"{t}\t{msg.latitude}\t{msg.longitude}\t{msg.altitude}\n"
@@ -370,9 +487,7 @@ class SeanoLogger(Node):
 
     def battery_callback(self, msg):
         t = self.get_local_timestamp()
-
         percentage_100 = msg.percentage * 100.0 if msg.percentage <= 1.0 else msg.percentage
-
         log_line = f"{t}\t{msg.voltage}\t{msg.current}\t{percentage_100}\n"
         csv_line = f"{t},{msg.voltage},{msg.current},{percentage_100}\n"
         self.write_sensor_data('battery', log_line, csv_line)
@@ -394,6 +509,9 @@ class SeanoLogger(Node):
 
         self.write_sensor_data('sbes', log_line, csv_line)
 
+    # =========================================================
+    # Metrics
+    # =========================================================
     def get_sensor_rate(self, key, elapsed):
         current = self.sample_count.get(key, 0)
         previous = self.last_sample_count.get(key, 0)
@@ -443,17 +561,21 @@ class SeanoLogger(Node):
             f"{sbes_hz:.2f}\n"
         )
 
-        for metrics_log_file in self.metrics_log_files:
-            metrics_log_file.write(log_line)
-            metrics_log_file.flush()
-
-        for metrics_csv_file in self.metrics_csv_files:
-            metrics_csv_file.write(csv_line)
-            metrics_csv_file.flush()
+        for i, metrics_log_file in enumerate(self.metrics_log_files):
+            try:
+                metrics_log_file.write(log_line)
+                metrics_log_file.flush()
+                self.metrics_csv_files[i].write(csv_line)
+                self.metrics_csv_files[i].flush()
+            except Exception as e:
+                self.get_logger().error(f"Metrics logging failed on target {i}: {e}")
 
         self.bytes_written_since_last_metrics = 0
         self.last_metrics_time = now
 
+    # =========================================================
+    # Shutdown
+    # =========================================================
     def destroy_node(self):
         for key in self.files:
             for log_file in self.files[key]:

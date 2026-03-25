@@ -1,9 +1,10 @@
-import rclpy
-from rclpy.node import Node
-from std_msgs.msg import Float64MultiArray
 import math
 import random
 import time
+
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import Float64MultiArray
 
 
 class SBESSim(Node):
@@ -21,33 +22,44 @@ class SBESSim(Node):
         self.depth_amp = 1.5
         self.temp_base = 28.0
 
+        self.publish_ok_reported = False
+        self.publish_error_reported = False
+
         self.get_logger().info(
-            f"SBES Dummy Started | topic=/sbes/data | sample_rate={self.sample_rate} Hz"
+            f"SBES Reader started | topic=/sbes/data | sample_rate={self.sample_rate} Hz"
         )
 
     def publish_sbes(self):
-        t = time.time() - self.start_time
+        try:
+            t = time.time() - self.start_time
 
-        depth = self.base_depth + self.depth_amp * math.sin(t * 0.1)
-        depth += random.uniform(-0.05, 0.05)
+            depth = self.base_depth + self.depth_amp * math.sin(t * 0.1)
+            depth += random.uniform(-0.05, 0.05)
 
-        water_temp = self.temp_base + 0.3 * math.sin(t * 0.03)
-        water_temp += random.uniform(-0.02, 0.02)
+            water_temp = self.temp_base + 0.3 * math.sin(t * 0.03)
+            water_temp += random.uniform(-0.02, 0.02)
 
-        quality_flag = 1.0
+            quality_flag = 1.0
 
-        msg = Float64MultiArray()
-        msg.data = [
-            round(depth, 3),
-            round(water_temp, 3),
-            quality_flag
-        ]
+            msg = Float64MultiArray()
+            msg.data = [
+                round(depth, 3),
+                round(water_temp, 3),
+                quality_flag
+            ]
 
-        self.publisher_.publish(msg)
+            self.publisher_.publish(msg)
 
-        self.get_logger().info(
-            f"Depth: {depth:.3f} m | Temp: {water_temp:.3f} C | Quality: {quality_flag:.0f}"
-        )
+            if not self.publish_ok_reported:
+                self.get_logger().info("SBES dummy publish active")
+                self.publish_ok_reported = True
+                self.publish_error_reported = False
+
+        except Exception as e:
+            if not self.publish_error_reported:
+                self.get_logger().error(f"SBES publish failed: {e}")
+                self.publish_error_reported = True
+                self.publish_ok_reported = False
 
 
 def main():
