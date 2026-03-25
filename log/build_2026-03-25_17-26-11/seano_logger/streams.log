@@ -1,0 +1,19 @@
+[1.068s] Invoking command in '/home/raihan/seano_ws/build/seano_logger': PYTHONPATH=/home/raihan/seano_ws/build/seano_logger/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_logger/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/raihan/seano_ws/build/seano_logger/build --no-deps symlink_data
+[1.507s] running develop
+[1.871s] running egg_info
+[1.872s] writing seano_logger.egg-info/PKG-INFO
+[1.872s] writing dependency_links to seano_logger.egg-info/dependency_links.txt
+[1.873s] writing entry points to seano_logger.egg-info/entry_points.txt
+[1.873s] writing requirements to seano_logger.egg-info/requires.txt
+[1.873s] writing top-level names to seano_logger.egg-info/top_level.txt
+[1.877s] reading manifest file 'seano_logger.egg-info/SOURCES.txt'
+[1.878s] writing manifest file 'seano_logger.egg-info/SOURCES.txt'
+[1.881s] running build_ext
+[1.881s] Creating /home/raihan/seano_ws/install/seano_logger/lib/python3.10/site-packages/seano-logger.egg-link (link to .)
+[1.883s] Installing logger_node script to /home/raihan/seano_ws/install/seano_logger/lib/seano_logger
+[1.883s] 
+[1.884s] Installed /home/raihan/seano_ws/build/seano_logger
+[1.884s] running symlink_data
+[1.884s] creating /home/raihan/seano_ws/install/seano_logger/share/seano_logger/launch
+[1.884s] symbolically linking /home/raihan/seano_ws/build/seano_logger/launch/seano_all.launch.py -> /home/raihan/seano_ws/install/seano_logger/share/seano_logger/launch
+[1.931s] Invoked command in '/home/raihan/seano_ws/build/seano_logger' returned '0': PYTHONPATH=/home/raihan/seano_ws/build/seano_logger/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/raihan/seano_ws/install/seano_logger/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/raihan/seano_ws/build/seano_logger/build --no-deps symlink_data

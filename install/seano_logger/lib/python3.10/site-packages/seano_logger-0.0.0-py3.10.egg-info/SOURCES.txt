@@ -8,6 +8,7 @@ setup.py
 ../../build/seano_logger/seano_logger.egg-info/requires.txt
 ../../build/seano_logger/seano_logger.egg-info/top_level.txt
 ../../build/seano_logger/seano_logger.egg-info/zip-safe
+launch/seano_all.launch.py
 resource/seano_logger
 seano_logger/__init__.py
 seano_logger/logger_node.py
