@@ -5,9 +5,13 @@ from datetime import datetime, timezone
 
 
 class IMUReader(Node):
-
     def __init__(self):
         super().__init__('imu_reader')
+
+        self.declare_parameter('sample_rate', 1.0)
+        self.sample_rate = float(self.get_parameter('sample_rate').value)
+        self.min_period = 1.0 / self.sample_rate
+        self.last_time = None
 
         self.create_subscription(
             Imu,
@@ -16,7 +20,7 @@ class IMUReader(Node):
             50
         )
 
-        self.get_logger().info("🧭 IMU Reader Started")
+        self.get_logger().info(f"IMU Reader Started | sample_rate={self.sample_rate} Hz")
 
     def convert_time(self, stamp):
         sec = stamp.sec
@@ -25,9 +29,12 @@ class IMUReader(Node):
         return dt.strftime("%Y-%m-%d %H:%M:%S") + f".{int(nanosec/1e6):03d}"
 
     def imu_callback(self, msg):
+        now = self.get_clock().now().nanoseconds / 1e9
+        if self.last_time is not None and (now - self.last_time) < self.min_period:
+            return
+        self.last_time = now
 
         timestamp = self.convert_time(msg.header.stamp)
-
         self.get_logger().info(
             f"{timestamp} | "
             f"Ax: {msg.linear_acceleration.x:.3f} | "
