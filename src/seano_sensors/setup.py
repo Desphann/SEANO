@@ -29,6 +29,7 @@ setup(
         'ctd_reader = seano_sensors.ctd_reader:main',
         'adcp_reader = seano_sensors.adcp_reader:main',
         'battery_reader = seano_sensors.battery_reader:main',
+        'sbes_reader = seano_sensors.sbes_reader:main',
         ],
     },
 )

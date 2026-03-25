@@ -1,1 +1,0 @@
-/home/raihan/seano_ws/src/seano_sensors/setup.py
